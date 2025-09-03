@@ -11,7 +11,7 @@ public class Calculator {
     }
 
     public static int multiply(int x, int y){
-       return  x*y;
+       return Logic.multiplyLogic(x,y);
     }
 
     public static float divide(float x, float y){

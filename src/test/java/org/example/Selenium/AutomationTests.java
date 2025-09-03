@@ -25,7 +25,7 @@ public class AutomationTests
     {
         LandingPage landingPage = new LandingPage(driver);
         landingPage.login();
-        Assert.assertEquals("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",driver.getCurrentUrl());
+        Assert.assertEquals(driver.getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
     }
 
     @AfterTest

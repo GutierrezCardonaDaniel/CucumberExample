@@ -11,22 +11,23 @@ import org.testng.annotations.AfterTest;
 
 public class loginSteps {
     WebDriver driver;
+    LandingPage landingPage;
 
-    @Given("I am in the landing page using {string}")
-    public void iAmInTheLandingPageUsingChrome(String browser) {
+    @Given("user is in the landing page using {string}")
+    public void userIsInTheLandingPageUsing(String browser) {
         driver = DriverFactory.getDriver(browser);
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        landingPage = new LandingPage(driver);
     }
 
-    @When("I login into the application using admin credentials")
-    public void iLoginIntoTheApplicationUsingAdminCredentials() {
-        LandingPage landingPage = new LandingPage(driver);
+    @When("user logs into the application using admin credentials")
+    public void userLoginIntoTheApplicationUsingAdminCredentials() {   ;
         landingPage.login();
     }
 
-    @Then("I should get to the admin dashboard page")
-    public void iShouldGetToTheAdminDashboardPage() {
-        Assert.assertEquals("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index", driver.getCurrentUrl());
+    @Then("user should get to the admin dashboard page")
+    public void userShouldGetToTheAdminDashboardPage() {
+        Assert.assertEquals(driver.getCurrentUrl(), "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index23423");
     }
 
     @AfterTest
@@ -34,14 +35,13 @@ public class loginSteps {
         driver.quit();
     }
 
-    @When("I login with invalid credentials")
-    public void iLoginWithInvalidCredentials() {
-        LandingPage landingPage = new LandingPage(driver);
+    @When("user logs in with invalid credentials")
+    public void userLoginWithInvalidCredentials() {
         landingPage.invalidLogin();
     }
 
-    @Then("Login fails")
+    @Then("login fails")
     public void loginFails() {
-        Assert.assertNotEquals("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index", driver.getCurrentUrl());
+        Assert.assertTrue(landingPage.isErrorMessageDisplayed());
     }
 }
